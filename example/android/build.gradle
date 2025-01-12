@@ -42,13 +42,13 @@ android {
         disable 'InvalidPackage'
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     // تأكد من تحديد إصدار JVM
     kotlinOptions {
-        jvmTarget = '17'  // ✅ تحديد jvmTarget إلى 1.8 لتجنب مشاكل التوافق
+        jvmTarget = '1.8'  // ✅ تحديد jvmTarget إلى 1.8 لتجنب مشاكل التوافق
     }
 }
 
