@@ -1,3 +1,23 @@
+buildscript {
+    ext.kotlin_version = '1.7.10'  // تأكد من أنك تستخدم الإصدار المناسب من Kotlin
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'  // الإصدار يتوافق مع Kotlin 1.7.10
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
