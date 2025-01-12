@@ -1,3 +1,6 @@
+group 'com.example.imagegallerysaver'
+version '1.0-SNAPSHOT'
+
 buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
@@ -6,26 +9,49 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:7.3.0'  // الإصدار يتوافق مع Kotlin 1.7.10
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-allprojects {
+rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
 
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(':app')
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace 'com.example.imagegallerysaver'  // ✅ أضف هذا السطر لتحديد الـ namespace
+    compileSdkVersion 33  // 🔄 تحديث الـ SDK إلى إصدار حديث
+
+    defaultConfig {
+        minSdkVersion 21  // 🔄 رفع الحد الأدنى للإصدار
+        targetSdkVersion 33  // ✅ تحديد target SDK
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // تأكد من تحديد إصدار JVM
+    kotlinOptions {
+        jvmTarget = '17'  // ✅ تحديد jvmTarget إلى 1.8 لتجنب مشاكل التوافق
+    }
 }
 
-tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"  // تأكد من استخدام jdk8
 }
