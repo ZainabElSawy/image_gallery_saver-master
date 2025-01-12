@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:7.3.0'  // الإصدار يتوافق مع Kotlin 1.7.10
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -21,26 +21,33 @@ rootProject.allprojects {
     }
 }
 
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.example.imagegallerysaver'
-    compileSdkVersion 30
+    namespace 'com.example.imagegallerysaver'  // ✅ أضف هذا السطر لتحديد الـ namespace
+    compileSdkVersion 33  // 🔄 تحديث الـ SDK إلى إصدار حديث
+
+    defaultConfig {
+        minSdkVersion 21  // 🔄 رفع الحد الأدنى للإصدار
+        targetSdkVersion 33  // ✅ تحديد target SDK
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-    defaultConfig {
-        minSdkVersion 16
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+
     lintOptions {
         disable 'InvalidPackage'
+    }
+
+    // تأكد من تحديد إصدار JVM
+    kotlinOptions {
+        jvmTarget = '1.8'  // ✅ تحديد jvmTarget إلى 1.8 لتجنب مشاكل التوافق
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"  // تأكد من استخدام jdk8
 }
