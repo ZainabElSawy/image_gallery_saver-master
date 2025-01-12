@@ -22,14 +22,22 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.example.imagegallerysaver'  // تحديد الـ namespace
-
-    compileSdkVersion 33  // تحديث الـ SDK إلى إصدار حديث
+    namespace 'com.example.imagegallerysaver'
+    compileSdkVersion 34
 
     defaultConfig {
-        minSdkVersion 21  // الحد الأدنى للإصدار
-        targetSdkVersion 33  // تحديد target SDK
+        minSdkVersion 21
+        targetSdkVersion 34
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -39,20 +47,8 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-
-    // تحديد إصدار JVM للتوافق مع Java 1.8
-    kotlinOptions {
-        jvmTarget = '1.8'  // تأكد من أن Kotlin يستهدف 1.8
-    }
-
-    // تعيين الـ Toolchain لاستخدام JDK 8 (اختياري ولكن يمكن أن يحل بعض المشاكل)
-    java {
-        toolchain {
-            languageVersion = JavaLanguageVersion.of(8)  // استخدام JDK 8
-        }
-    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"  // استخدام Kotlin مع JDK 8
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
