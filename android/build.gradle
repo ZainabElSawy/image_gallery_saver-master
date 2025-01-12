@@ -1,24 +1,3 @@
-buildscript {
-    ext.kotlin_version = '1.7.10'  // تأكد من أنك تستخدم الإصدار المناسب من Kotlin
-
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'  // الإصدار يتوافق مع Kotlin 1.7.10
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-rootProject.allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -43,7 +22,7 @@ android {
 
     // تحديد إصدار JVM للتوافق مع Java 1.8
     kotlinOptions {
-        jvmTarget = '1.8'  // تأكد من أن هذا الإصدار متوافق مع Java 1.8
+        jvmTarget = '1.8'  // تأكد من أن Kotlin يستهدف 1.8
     }
 
     // تعيين الـ Toolchain لاستخدام JDK 8 (اختياري ولكن يمكن أن يحل بعض المشاكل)
