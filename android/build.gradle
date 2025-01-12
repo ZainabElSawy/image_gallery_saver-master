@@ -1,8 +1,6 @@
-group 'com.example.imagegallerysaver'
-version '1.0-SNAPSHOT'
-
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.7.10'  // تأكد من أنك تستخدم الإصدار المناسب من Kotlin
+
     repositories {
         google()
         mavenCentral()
@@ -25,12 +23,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace 'com.example.imagegallerysaver'  // ✅ أضف هذا السطر لتحديد الـ namespace
-    compileSdkVersion 33  // 🔄 تحديث الـ SDK إلى إصدار حديث
+    namespace 'com.example.imagegallerysaver'  // تحديد الـ namespace
+
+    compileSdkVersion 33  // تحديث الـ SDK إلى إصدار حديث
 
     defaultConfig {
-        minSdkVersion 21  // 🔄 رفع الحد الأدنى للإصدار
-        targetSdkVersion 33  // ✅ تحديد target SDK
+        minSdkVersion 21  // الحد الأدنى للإصدار
+        targetSdkVersion 33  // تحديد target SDK
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -42,12 +41,19 @@ android {
         disable 'InvalidPackage'
     }
 
-    // تأكد من تحديد إصدار JVM
+    // تحديد إصدار JVM للتوافق مع Java 1.8
     kotlinOptions {
-        jvmTarget = '1.8'  // ✅ تحديد jvmTarget إلى 1.8 لتجنب مشاكل التوافق
+        jvmTarget = '1.8'  // تأكد من أن هذا الإصدار متوافق مع Java 1.8
+    }
+
+    // تعيين الـ Toolchain لاستخدام JDK 8 (اختياري ولكن يمكن أن يحل بعض المشاكل)
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(8)  // استخدام JDK 8
+        }
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"  // تأكد من استخدام jdk8
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"  // استخدام Kotlin مع JDK 8
 }
