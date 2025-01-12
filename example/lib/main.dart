@@ -104,12 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ui.Image image = await boundary.toImage();
     ByteData? byteData =
         await (image.toByteData(format: ui.ImageByteFormat.png));
-    if (byteData != null) {
-      final result =
-          await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
-      print(result);
-      Utils.toast(result.toString());
-    }
+    final result =
+        await ImageGallerySaver.saveImage(byteData!.buffer.asUint8List());
+    print(result);
+    Utils.toast(result.toString());
   }
 
   _saveNetworkImage() async {
